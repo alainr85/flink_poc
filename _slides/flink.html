@@ -1,0 +1,267 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=1024" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <title>Flink in Production</title>
+    <link href='https://fonts.googleapis.com/css?family=Nixie+One|Muli:300,400,300italic,400italic' rel='stylesheet' type='text/css'>
+    <link href="highlight_default.css" rel="stylesheet" />
+    <link href="flink.css" rel="stylesheet" />
+</head>
+
+<body class="impress-not-supported">
+
+<div id="impress">
+
+    <div class="step slide" data-x="-1000" data-y="-1500">
+        <h1 class="hdr-font">Flink in Production</h1>
+        <img src="squ.png" />
+    </div>
+
+    <div class="step slide" data-x="0" data-y="-1000">
+        
+        <!--
+         <div style="position:relative; left:-120px; top:20px; ">
+            <canvas id="cx" style="position:relative;"></canvas>
+         </div>
+        -->
+
+        <div style="position:relative;  left:30%;">
+            <h1 class="hdr-font" style="font-size:4.0em; display:inline-block;">Hi!</h1><br/>
+            <h2 class="txtcol body-font" style="font-weight:bolder; margin-top:40px; font-size:2.0em;">I am Alain Richardt</h2>
+            <h2 class="txtcol body-font" style="margin-top:40px; font-size:1.0em; margin-bottom:40px;"><strong style="font-weight:bolder; color:white;">@alaincxs</strong> on twitter</h2>
+
+            <h2 class="txtcol" style="line-height:1.6em;">Python, C/C++/ObjC, JS and Scala Developer</h2>
+            <h2 class="txtcol" style="line-height:1.6em;">Data Engineer @ Data Reply UK</h2>
+            <h2 class="txtcol" style="line-height:1.6em;">+ Startup (RAMM Science)</h2>
+            <h2 class="txtcol" style="line-height:1.6em;">iOS Tinkerer (2 iPhone apps, 1 iPad app)</h2>
+            <div style="margin-top:40px;">
+                <img src="fav_keras.png" />
+                <img src="fav_tensorflow.png" />
+                <img src="fav_sklearn.png" />
+                <img src="fav_llvm.png" />
+            </div>
+        </div>
+
+    </div>
+
+    <div class="step slide" data-x="1500" data-y="-1500">
+        
+        <h2 class="hdr-font" style="font-size:3.0em; display:inline-block; position:absolute; left:-60px;">Flink in 5</h2>
+        <img src="fl_inst.gif" style="position:absolute; right:-120px; top:24px;" />
+
+        <pre style="position:absolute; left:-95px; top:100px; width:520px;padding:40px; "><code style="border-radius:5px;" class="bash">$ cd ~/Downloads
+$ tar xzf flink-*.tgz
+$ cd flink-0.10.2
+$ bin/start-local.sh</code></pre>
+
+        <div style="position:absolute; top:340px; left:-58px;">
+            <h2 class="txtcol body-font" style="font-weight:bolder; margin-top:40px; font-size:1.2em;">Cluster</h2>
+                <ul>
+                    <li class="txtcol" style="line-height:2.3em;">&nbsp;&nbsp;&nbsp;<span class="hdr-col">&#x25c7;</span>&nbsp;&nbsp;&nbsp;Configure priv/pub key ssh authentication</li>
+                    <li class="txtcol" style="line-height:2.3em;">&nbsp;&nbsp;&nbsp;<span class="hdr-col">&#x25c7;</span>&nbsp;&nbsp;&nbsp;Make sure flink is in the same place on all filesystems</li>
+                    <li class="txtcol" style="line-height:2.3em;">&nbsp;&nbsp;&nbsp;<span class="hdr-col">&#x25c7;</span>&nbsp;&nbsp;&nbsp;Set <span style="color:white; font-family: 'Nixie One';">jobmanager.rpc.address: 10.0.0.1</span> in <span style="color:white;">conf/flink-conf.yaml</span></li>
+                    <li  class="txtcol" style="line-height:2.3em;">&nbsp;&nbsp;&nbsp;<span class="hdr-col">&#x25c7;</span>&nbsp;&nbsp;&nbsp;Add workers to conf/slaves (1 hostname per line)</li>
+                </ul>
+        </div>
+    </div>
+
+    <div id="title" class="step" data-x="0" data-y="1000" data-scale="4">
+        <span class="try hdr-font">What's the</span>
+        <h1 class="hdr-font" style="font-size:3.2em !important;">BIG IDEA?</h1>
+    </div>
+
+    <!--
+        
+        This element introduces rotation.
+        
+        Notation shouldn't be a surprise. We use `data-rotate="90"` attribute, meaning that this
+        element should be rotated by 90 degrees clockwise.
+        
+    -->
+    <div id="its" class="step" data-x="850" data-y="5000" data-rotate="90" data-scale="5">
+        <h2 class="hdr-font" style="font-size:1.4em; display:inline-block; position:absolute; left:-150px; top:-250px;">The old way<span id="so2k15" style="display:none;">... soooo 2015</span></h2>
+
+        <div id="consumingRam" class="arrow_box_left body-font" style="padding:10px 20px; display:none; width:200px; color:white; font-size:0.5em; position:absolute; left:100px; top:-110px;">
+            <h1 class="logo">Consuming RAM on crawlers!</h1>
+        </div>
+
+        <div  id="singlePOF"  class="arrow_box_btm body-font" style="padding:10px 20px; display:none; width:200px; color:white; font-size:0.5em; position:absolute; left:60px; top:60px;">
+            <h1 class="logo">Single point of failure :(</h1>
+        </div>
+
+        <div  id="highlyCPUbound"  class="arrow_box_left body-font" style="padding:10px 20px; display:none; width:200px; color:white; font-size:0.5em; position:absolute; left:380px; top:20px; transform: rotate(-45deg);">
+            <h1 class="logo">Highly CPU bound</h1>
+        </div>
+
+        <div  id="unusedCPU1"  class="arrow_box_top body-font" style="padding:10px 20px; display:none; text-align:center; width:220px; color:white; font-size:0.5em; position:absolute; left:50px; top:310px;">
+            <h1 class="logo">Unused CPU here</h1>
+        </div>
+
+        <div  id="unusedCPU2" class="arrow_box_top body-font" style="padding:10px 20px; display:none; text-align:center; width:220px; color:white; font-size:0.5em; position:absolute; left:490px; top:310px;">
+            <h1 class="logo">Unused CPU here</h1>
+        </div>
+
+        <img src="old_busted.png" style="position:absolute; left:-140px; top:-80px; width:1100px;" />
+    </div>
+
+
+    <div id="newhotness" class="step" data-x="850" data-y="18000" data-rotate="90" data-scale="5">
+        <h2 class="hdr-font" style="font-size:1.4em; display:inline-block; position:absolute; left:-150px; top:-280px;">New hotness</h2>
+
+
+        <div  id="newhotpopup" class="arrow_box_btm body-font" style="padding:10px 20px; text-align:left; width:420px; color:white; font-size:0.3em; position:absolute; left:340px; top:-300px; display:none;">
+            <h1 class="logo">
+                <span class="hdr-col" style="font-style:normal;">&#x25c7;</span> Deduplication<br/>
+                <span class="hdr-col" style="font-style:normal;">&#x25c7;</span> Filtering<br/>
+                <span class="hdr-col" style="font-style:normal;">&#x25c7;</span> Geo-coding<br/>
+                <span class="hdr-col" style="font-style:normal;">&#x25c7;</span> Classification (Random Forest)<br/>
+            </h1>
+        </div>
+
+        <img src="newhot.png" style="position:absolute; left:-140px; top:-140px; width:1100px;" />
+    </div>
+
+    <div id="tiny" class="step tiny" data-x="1400" data-y="19300" data-z="-10000" data-rotate="90" data-scale="1">
+        <h2 class="hdr-font" style="font-size:1.4em; display:inline-block; position:absolute; left:-330px; top:-300px;">Use the source, Luke</h2>
+
+        <img style="position:absolute; top:-300px; right:-350px;" src="yoda.png" />
+
+
+        <div style="color:white; font-size:0.7em; position:absolute; left:-340px; top:-160px; border:1px solid #fff; padding:10px;">
+            <span style="color:#777;">KafkaConsumer</span><br/>
+            map()<br/>
+            filter()
+        </div>
+
+        <div style="position:absolute; font-size:0.7em; color:white; position:absolute;left:-30px; top:-90px;">
+            &#8594;&nbsp; group &nbsp;&#8594;
+        </div>
+
+        <div style="position:absolute; width:300px; font-size:0.7em; color:white; position:absolute;left:200px; top:-158px;border:1px solid #fff; padding:10px;">
+            <span style="color:#777;">Time</span><br/>
+            (Tumbling window)
+        </div>
+
+        <div style="position:absolute; left:-340px;">
+            <img src="scala.png" width=500 />
+        </div>
+
+        <div style="position:absolute; left:380px; color:white; font-size:0.5em; top:270px;">
+            * source code on github: https://github.com/alainr85/flink_poc
+        </div>
+
+    </div>
+
+    <div id="tiny2" class="step tiny" data-x="200" data-y="19300" data-z="-10000" data-rotate="90" data-scale="1">
+        <h2 class="hdr-font" style="font-size:1.4em; display:inline-block; position:absolute; left:-390px; top:-330px;">How Fast?</h2>
+        <img style="position:absolute; top:-330px; right:-440px;" width=900 src="ent_d.png" />
+
+
+        <div style="font-size:0.6em; color:white; display:inline-block; position:absolute; left:-350px; top:-150px;">
+                Hardware:<br/>
+                - 3 nodes, 16 XEON cores (4x4)<br/>
+                - 16 GB of RAM<br/>
+                - 1GB ethernet<br/><br/>
+                Bottleneck: Crawlers!<br/>
+        </div>
+
+        <div style="position:absolute; left:100px; top:0px;">
+            <img src="hash.png" width=800 />
+        </div>
+
+        <div class="arrow_box_left body-font" style="padding:10px 20px; width:200px; z-index:1000; color:white; font-size:0.5em; position:absolute; left:620px; top:-30px; transform: rotate(-30deg);">
+            <h1 class="logo">100,000 / s</h1>
+        </div>
+
+    </div>
+
+    <div id="alltogether" class="step" data-x="6300" data-y="2000" data-rotate="20" data-scale="4">
+        <h2 class="hdr-font" style="font-size:1.4em; display:inline-block; position:absolute; left:-100px; top:-330px;">Dashboards</h2>
+
+        <img id="newhotdash" src="newhot.png" style="position:absolute; left:-140px; top:-250px; width:1100px;" />
+
+        <div id="dashshow_1" class="hdr-font" style="font-size:1.4em; display:none; position:absolute; left:370px; top:130px;"> ← </div>
+
+        <div id="dashshow_2" class="hdr-font" style="font-size:1.4em; display:none; position:absolute; left:230px; top:205px;"> &darr; </div>
+
+        <div id="dashshow_3" class="hdr-font" style="border: 1px solid rgb(25, 187, 213); font-size:0.4em; position:absolute; left:143px; top:285px; text-align:center; display:none; padding:10px;">node.js<br/>websocket broadcast</div>
+
+        <video id="dashviewo" src="realtime.webm" controls style="display:none;position:absolute; width: 900px; top:-200px;">
+        </video>
+    </div>
+
+</div>
+
+<script src="impress.js"></script>
+<script>impress().init();</script>
+
+<script src="highlight.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+
+<script src="jquery.js"></script>
+
+<script type="text/javascript">
+
+    var existingSystemCtr = 0;
+
+    var dashCtr = 0;
+
+    $( document ).ready(function() {
+        $( "body" ).keypress(function(evt, key) {
+          if(evt.charCode == 101) {  // "e"
+                existingSystemCtr += 1;
+
+                if(existingSystemCtr == 1) {
+                    $('#so2k15').fadeIn('slow');
+                }
+                else if(existingSystemCtr == 2) {
+                    $('#consumingRam').fadeIn('slow');
+                }
+                else if(existingSystemCtr == 3) {
+                    $('#singlePOF').fadeIn('slow');
+                }
+                else if(existingSystemCtr == 4) {
+                    $('#highlyCPUbound').fadeIn('slow');
+                }
+                else if(existingSystemCtr == 5) {
+                    $('#unusedCPU1').fadeIn('slow');
+                }
+                else if(existingSystemCtr == 6) {
+                    $('#unusedCPU2').fadeIn('slow');
+                }
+          }
+
+          if(evt.charCode == 104) {  // h
+            $('#newhotpopup').fadeIn('slow');
+          }
+
+          if(evt.charCode == 100) { // d
+            if(dashCtr == 0 ) {
+                $('#dashshow_1').fadeIn('slow');
+                $('#dashshow_2').fadeIn('slow');
+                $('#dashshow_3').fadeIn('slow');
+                dashCtr = 1;
+                return;
+            }
+
+            if(dashCtr == 1) {
+                $('#dashshow_1').hide();
+                $('#dashshow_2').hide();
+                $('#dashshow_3').hide();
+                $('#newhotdash').hide();
+
+                $('#dashviewo').fadeIn('slow');
+            }
+          }
+
+          console.log(evt.charCode);
+
+        });
+
+    });
+</script>
+
+</body>
+</html>
